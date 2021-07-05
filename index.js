@@ -45,7 +45,7 @@ async function getData(symbol="BTCUSDT",interval="1d",limit=50)
             sum +=parseFloat(val[4])
         })
         sum = (sum/limit).toFixed(4)
-        console.log(sum)
+
         return sum
 
 
@@ -126,24 +126,8 @@ async function wma(symbol="BTCUSDT",interval="1d",limit=50)
 
         let rsi=100-100/(1+rs)
         
-        return rsi
+        return rsi.toFixed(3)
     }
-
-    
-   async function ema()
-   {
-     let value=await getData("BTCUSDT","1d",5)
-     let multiplier= 2/(value.data.length+1)
-     console.log(multiplier)
-     let ema1=value.data[value.data.length-1][4]
-    console.log(ema1)
-
-     for(let i=value.data.length-2;i>=0;i--)
-     {
-       ema1=(value.data[i][4]-ema1)*multiplier+ema1
-     }
-     console.log(ema1)
-   }    
 
 
 
@@ -155,23 +139,3 @@ export {
     rsi
 }
 
-function ematest()
-{
-    let dizi=[10,11,12]
-    let multiplier=2/(3+1)
-    console.log(multiplier)
-    let ema1=dizi[0]
-   
-    for(let i=1;i<dizi.length;i++)
-    {
-       /*   let ilk=multiplier*dizi[i]
-       let last=(1-multiplier)*ema1 */
-
-       ema1=dizi[i] + (1-multiplier)*ema1
-      /*  ema1=ilk+last */
-   
-     console.log(ema1)
-    }
-
-}
-ematest()
